@@ -32,7 +32,7 @@ export class GalleryService {
 
   public getGalleryById(id: number){
     return new Observable((o: Observer<any>) => {
-      this.http.get('http://localhost:8000/api/galleries' + id, {
+      this.http.get('http://localhost:8000/api/galleries/' + id, {
         headers: this.auth.getRequestHeader()
       })
       .subscribe((gallery: any) => {

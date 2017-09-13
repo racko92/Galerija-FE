@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SingleGalleryComponent implements OnInit {
 
   private gallery: Gallery;
+  
   constructor(
     public galleryService: GalleryService,
     private route: ActivatedRoute,
@@ -18,11 +19,11 @@ export class SingleGalleryComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(() => {
       let id = parseInt(this.route.snapshot.paramMap.get('id'));
-      console.log(id);
       this.galleryService.getGalleryById(id).subscribe((data: {gallery: Gallery}) => {
         this.gallery = data.gallery;
       })
-    })
+    });
+
   }
 
 }

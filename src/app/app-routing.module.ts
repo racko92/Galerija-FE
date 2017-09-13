@@ -10,7 +10,7 @@ import { GuestGuard } from './shared/guards/guest.guard';
 
 
 const appRoutes: Routes = [
-    {
+      {
         path: '',
         redirectTo: '/gallery',
         pathMatch: 'full'
@@ -19,22 +19,21 @@ const appRoutes: Routes = [
         path: 'gallery',
         component: GalleryComponent,
         canActivate: [ AuthGuard ],
-        children: [
-            {
-                path: ':id',
-                component: SingleGalleryComponent
-            },
-        ]
       },
       {
-          path: 'login',
-          component: LoginComponent,
-          canActivate: [ GuestGuard ],
+        path: 'gallery/:id',
+        component: SingleGalleryComponent,
+        canActivate: [ AuthGuard ],        
       },
       {
-          path: 'register',
-          component: RegisterComponent,
-          canActivate: [ GuestGuard ],
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [ GuestGuard ],
+      },
+      {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [ GuestGuard ],
       }
 ];
 
