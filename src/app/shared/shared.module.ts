@@ -5,6 +5,9 @@ import { GalleryService } from './services/gallery.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 
+import { AuthGuard } from './guards/auth.guard';
+import { GuestGuard } from './guards/guest.guard';
+
 @NgModule({
   imports: [
     CommonModule
@@ -12,7 +15,9 @@ import { UserService } from './services/user.service';
   providers: [
     GalleryService,
     AuthService,
-    UserService
+    UserService,
+    AuthGuard,
+    GuestGuard
   ],
   declarations: []
 })

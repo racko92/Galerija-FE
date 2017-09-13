@@ -33,6 +33,12 @@ export class AuthService {
     })
   }
 
+  logout(urlName = 'login'){
+    window.localStorage.removeItem('token');
+    this.isAuthenticated = false;
+    this.router.navigateByUrl(urlName);
+  }
+
   getRequestHeader(){
     let token = window.localStorage.getItem('token');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`)

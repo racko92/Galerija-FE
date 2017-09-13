@@ -14,9 +14,7 @@ export class LoginComponent {
   ) { }
 
   private login(email, password){
-    console.log(email, password);
     this.auth.login(email, password).subscribe((token: string) => {
-      console.log(token);
       this.router.navigateByUrl('/');
     }), (err) =>{
       alert('${err.error}');

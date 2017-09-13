@@ -5,6 +5,10 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { LoginComponent } from './components/auth/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SingleGalleryComponent } from './components/gallery/single-gallery/single-gallery.component'
+import { AuthGuard } from './shared/guards/auth.guard';
+import { GuestGuard } from './shared/guards/guest.guard';
+
+
 const appRoutes: Routes = [
     {
         path: '',
@@ -14,6 +18,7 @@ const appRoutes: Routes = [
       {
         path: 'gallery',
         component: GalleryComponent,
+        canActivate: [ AuthGuard ],
         children: [
             {
                 path: ':id',
@@ -24,10 +29,12 @@ const appRoutes: Routes = [
       {
           path: 'login',
           component: LoginComponent,
+          canActivate: [ GuestGuard ],
       },
       {
           path: 'register',
           component: RegisterComponent,
+          canActivate: [ GuestGuard ],
       }
 ];
 
