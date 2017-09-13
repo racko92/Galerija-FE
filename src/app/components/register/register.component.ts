@@ -1,14 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { User } from './../../shared/models/user.model';
+import { UserService } from './../../shared/services/user.service';
+import { Router } from '@angular/router';
+import { AuthService } from './../../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  constructor() { }
+  private newUser: User = new User;
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private auth: AuthService
+  ) { }
 
-  ngOnInit() {
+  submitUser(user: User){
+    this.userService.addUser(user).subscribe(() => {
+
+      this.auth.login(user.email, user.password).subscribe((token: string) => {
+        this.router.navigateByUrl('/');
+      }), (err) =>{
+        alert('${err.error}');
+      }
+
+    }), (err) =>{
+      alert('${err.error}');
+    }
   }
-
 }

@@ -1,29 +1,98 @@
 <h1>Login works!</h1>
 
-<form (ngSubmit)="register(email.value, password.value)">
+<form #registerForm="ngForm" (ngSubmit)="submitUser(newUser)">
     <div class="form-group">
-        <label for="firstName">Name</label>
-        <input type="text" name="firstName" class="form-control" #firstName>
+        <label for="firstName">First Name</label>
+        <input #firstName="ngModel" type="text" name="firstName" minlength="2" [(ngModel)]="newUser.firstName" class="form-control" required>
+        
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+        class="alert alert-danger">
+        <div *ngIf="firstName.errors.required">
+          First name is required.
+        </div>
+        <div *ngIf="firstName.errors.minlength">
+          First Name must be at least 2 characters long.
+        </div>  
+      </div>
     </div>
+
+
     <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" name="lastName" class="form-control" #lastName>
+        <input  #lastName="ngModel" type="text" name="lastName" minlength="2" [(ngModel)]="newUser.lastName" class="form-control">
+    
+        
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+        class="alert alert-danger">
+            <div *ngIf="lastName.errors.required">
+                Last name is required.
+            </div>
+            <div *ngIf="lastName.errors.minlength">
+                Last Name must be at least 2 characters long.
+            </div>  
+        </div>
     </div>
+
+
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" name="email" class="form-control" #email>
+        <input #email="ngModel" [(ngModel)]="newUser.email" type="email" name="email" class="form-control">
+
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="alert alert-danger">
+            <div *ngIf="email.errors.required">
+            Email is required.
+            </div>
+            <div *ngIf="email.errors.email">
+            Please provide valid email address.
+            </div>  
+      </div>
     </div>
+
+
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" #password>
+        <input  #password="ngModel" name="password" password [(ngModel)]="newUser.password" type="password" class="form-control" required>
+    
+        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+            Password is required.
+            </div>
+            <div *ngIf="password.errors.email">
+            Please provide valid password.
+            </div>  
+        </div>
     </div>
+
+
     <div class="form-group">
-        <label for="passwordConfirm">Confirm Password</label>
-        <input type="password" name="passwordConfirm" class="form-control" #passwordConfirm>
+        <label for="confirm-password">Confirm Password</label>
+        <input #confirmPassword="ngModel" name="confirm-password" password [equalTo]="password" [(ngModel)]="newUser.confirmPassword" type="password" class="form-control" required>
+    
+        <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+        class="alert alert-danger">
+            <div *ngIf="confirmPassword.errors.required">
+            Confirm Password is required.
+            </div>
+            <div *ngIf="confirmPassword.errors.equalTo">
+            The confirmation desn't match.
+            </div>  
+      </div>
     </div>
+
+
     <div class="form-group">
-      <input type="checkbox" name="terms" #terms>
-      <label for="terms">I accept terms and conditions</label>      
+      <input #terms="ngModel" [(ngModel)]="newUser.terms" type="checkbox" name="terms" >
+      <label for="terms">I accept terms and conditions</label>
+      
+      <div *ngIf="!terms" class="alert alert-danger">
+        Terms and confitions need to be accepted in order to register
+      </div>
     </div>
+
+
     <button type="submit" class="btn btn-primary">Register</button>
+
+
 </form>

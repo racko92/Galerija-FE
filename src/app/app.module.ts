@@ -12,6 +12,9 @@ import { SharedModule } from './shared/shared.module';
 import { GalleryRowComponent } from './components/gallery/gallery-row/gallery-row.component';
 import { SingleGalleryComponent } from './components/gallery/single-gallery/single-gallery.component';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

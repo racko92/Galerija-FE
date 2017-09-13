@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GalleryService } from './services/gallery.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   imports: [
@@ -10,7 +11,8 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     GalleryService,
-    AuthService
+    AuthService,
+    UserService
   ],
   declarations: []
 })
