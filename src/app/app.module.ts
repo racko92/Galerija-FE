@@ -13,6 +13,8 @@ import { GalleryRowComponent } from './components/gallery/gallery-row/gallery-ro
 import { SingleGalleryComponent } from './components/gallery/single-gallery/single-gallery.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { CreateGalleryComponent } from './components/gallery/create-gallery/create-gallery.component';
+import { MyGalleriesComponent } from './components/gallery/my-galleries/my-galleries.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { CustomFormsModule } from 'ng2-validation';
     LoginComponent,
     RegisterComponent,
     GalleryRowComponent,
-    SingleGalleryComponent
+    SingleGalleryComponent,
+    CreateGalleryComponent,
+    MyGalleriesComponent
   ],
   imports: [
     BrowserModule,

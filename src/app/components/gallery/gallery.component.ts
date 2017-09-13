@@ -9,7 +9,7 @@ import { Gallery } from './../../shared/models/gallery.model';
 })
 export class GalleryComponent implements OnInit{
 
-  private galleries: any[] = [];
+  private galleries: Gallery;
   private galleryService: GalleryService;
 
   constructor(private injector: Injector) {
@@ -21,6 +21,7 @@ export class GalleryComponent implements OnInit{
     this.galleryService.getGalleries().subscribe(
       data => {
         this.galleries = data;
+        console.log(this.galleries);
       },
       (err: HttpErrorResponse) => {
         alert(`Backend Error with code ${err.status} and status ${err.error}`);

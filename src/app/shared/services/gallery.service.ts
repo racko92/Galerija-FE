@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Observer } from 'rxjs';
 import { Gallery } from './../models/gallery.model';
 import { AuthService } from './auth.service';
+import { Image } from './../models/images.model';
 
 @Injectable()
 export class GalleryService {
 
   private galleries: Gallery[] = [];
-
+  private gallery: Gallery;
   constructor(
     private http: HttpClient,
     private auth: AuthService,
@@ -22,7 +23,7 @@ export class GalleryService {
     })
       .subscribe((galleries: any[]) => {
         this.galleries = galleries.map((gallery) => {
-          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.imageUrl);
+          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures);
         });
         o.next(this.galleries);
         return o.complete();
@@ -35,8 +36,11 @@ export class GalleryService {
       this.http.get('http://localhost:8000/api/galleries/' + id, {
         headers: this.auth.getRequestHeader()
       })
-      .subscribe((gallery: any) => {
-        o.next(new Gallery(gallery));
+      .subscribe((galleries: any) => {
+        this.gallery = galleries.map((gallery) => {
+          return new Gallery(gallery.id, gallery.name, gallery.description);
+        });
+        o.next(this.gallery);
         return o.complete;
       })
     })

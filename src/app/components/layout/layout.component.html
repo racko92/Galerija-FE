@@ -7,6 +7,12 @@
       <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
     </li>
     <li class="nav-item" *ngIf="auth.isAuthenticated">
+      <a class="nav-link" routerLink="/my-galleries" routerLinkActive="active">My Galleries</a>
+    </li>
+    <li class="nav-item" *ngIf="auth.isAuthenticated">
+      <a class="nav-link" routerLink="/create" routerLinkActive="active">Create New Gallery</a>
+    </li>
+    <li class="nav-item" *ngIf="auth.isAuthenticated">
         <a class="nav-link" (click)="auth.logout()">Logout</a>        
     </li>
     <li class="nav-item" *ngIf="!auth.isAuthenticated">

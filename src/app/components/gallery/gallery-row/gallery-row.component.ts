@@ -11,7 +11,8 @@ export class GalleryRowComponent {
   set galleryRow(gallery: Gallery){
     this.gallery = gallery;
   }
-  constructor() { }
+  constructor() {
+   }
 
   private gallery: Gallery;
 }

@@ -5,9 +5,11 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { LoginComponent } from './components/auth/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SingleGalleryComponent } from './components/gallery/single-gallery/single-gallery.component'
+import { MyGalleriesComponent } from './components/gallery/my-galleries/my-galleries.component';
+import { CreateGalleryComponent } from './components/gallery/create-gallery/create-gallery.component';
+
 import { AuthGuard } from './shared/guards/auth.guard';
 import { GuestGuard } from './shared/guards/guest.guard';
-
 
 const appRoutes: Routes = [
       {
@@ -34,6 +36,16 @@ const appRoutes: Routes = [
         path: 'register',
         component: RegisterComponent,
         canActivate: [ GuestGuard ],
+      },
+      {
+        path: 'my-galleries',
+        component: MyGalleriesComponent,
+        canActivate: [ AuthGuard]
+      },
+      {
+        path: 'create',
+        component: CreateGalleryComponent,
+        canActivate: [ AuthGuard]
       }
 ];
 

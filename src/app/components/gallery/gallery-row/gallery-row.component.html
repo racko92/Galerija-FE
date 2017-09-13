@@ -1,5 +1,7 @@
 <li class="align-middle">
  <h3>Name: <strong><a [routerLink]="['/gallery', gallery.id]" >{{ gallery.name }}</a></strong></h3><br>
  Description: {{ gallery.description }} <br>
-  <img src="{{gallery.imageUrl}}">
+ <div>
+  <img class="img-responsive" *ngFor="let picture of gallery.pictures" height="120" width="120" src="{{ picture.imageUrl }}">
+ </div>
 </li>

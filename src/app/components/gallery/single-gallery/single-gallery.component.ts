@@ -13,17 +13,28 @@ export class SingleGalleryComponent implements OnInit {
   
   constructor(
     public galleryService: GalleryService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(() => {
-      let id = parseInt(this.route.snapshot.paramMap.get('id'));
-      this.galleryService.getGalleryById(id).subscribe((data: {gallery: Gallery}) => {
-        this.gallery = data.gallery;
-      })
-    });
-
+    let id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.galleryService.getGalleryById(id).subscribe(
+      data => {
+        this.gallery = data;
+      }
+    );
   }
 
 }
+
+
+
+
+
+
+// this.route.params.subscribe(() => {
+//   let id = parseInt(this.route.snapshot.paramMap.get('id'));
+//   this.galleryService.getGalleryById(id).subscribe((data: {gallery: Gallery}) => {
+//     this.gallery = data.gallery;
+//   })
+// }); 
