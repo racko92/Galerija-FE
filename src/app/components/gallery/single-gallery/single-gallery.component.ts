@@ -23,7 +23,6 @@ export class SingleGalleryComponent implements OnInit {
       let id = parseInt(this.route.snapshot.paramMap.get('id'));
       this.galleryService.getGalleryById(id).subscribe((gallery: Gallery) => {
         this.gallery = gallery;
-        console.log(this.gallery);
       })
     });
   }

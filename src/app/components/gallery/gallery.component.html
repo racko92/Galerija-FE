@@ -4,4 +4,8 @@
 
   
 </ul>
-<button (click)="nextPage()">Load More</button>
+<button type="submit" [disabled]="!galleryService.paginateValidation()" 
+    class="{{ galleryService.paginateValidation() ? 'btn btn-primary' : 'btn btn-danger' }}" 
+    (click)="nextPage()">
+    {{galleryService.paginateValidation() ? "Load More" : "End of page" }}
+</button>

@@ -10,13 +10,14 @@ export class GalleryService {
 
   private galleries: Gallery[] = [];
   private gallery: Gallery;
+  public currentPage: number;
   public paginate: number = 1;
-  public paginateLast: string;
+  public paginateLast: number;
 
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService,
+    private auth: AuthService
   ) { }
 
   public getGalleries()
@@ -26,6 +27,8 @@ export class GalleryService {
     headers: this.auth.getRequestHeader()
     })
       .subscribe((galleries: any) => {
+        this.paginateLast = galleries.last_page;
+        this.currentPage = galleries.current_page;
         this.galleries = galleries.data.map((gallery) => {
           return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures);
         });
@@ -55,13 +58,21 @@ export class GalleryService {
         headers: this.auth.getRequestHeader()
       })
       .subscribe((galleries: any) => {
+        this.paginateLast = galleries.last_page;
+        this.currentPage = galleries.current_page;
         this.galleries = galleries.data.map((gallery) => {
-          return this.galleries.push(new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures));
+          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures);
         });
         o.next(this.galleries);
         return o.complete();
       });
     })
- }
+  }
 
+  paginateValidation(){
+    if(this.currentPage < this.paginateLast){
+      return true;
+    }
+    return false;
+  }
 }

@@ -11,9 +11,9 @@ export class GalleryComponent implements OnInit{
 
   private galleries: Gallery[];
   private galleryService: GalleryService;
+  
 
   constructor(private injector: Injector) {
-    
    }
 
    ngOnInit(){
@@ -26,14 +26,15 @@ export class GalleryComponent implements OnInit{
         alert(`Backend Error with code ${err.status} and status ${err.error}`);
       }
     )
-    // Object.assign(this.current_page, this.galleries.current_page);
    }
 
    nextPage(){
-     this.galleryService.getGalleries().subscribe(
-      data => {
-        this.galleries = data;
-      },
+     this.galleryService.paginateNextPage().subscribe(
+      (data => {
+        data.forEach((gallery: Gallery) =>{
+          this.galleries.push(gallery);
+        })
+      }),
       (err: HttpErrorResponse) => {
         alert(`Backend Error with code ${err.status} and status ${err.error}`);
       }

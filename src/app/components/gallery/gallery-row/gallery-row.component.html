@@ -1,7 +1,7 @@
 <li class="align-middle">
- <h3>Name: <strong><a [routerLink]="['/gallery', gallery.id]" >{{ gallery.name }}</a></strong></h3><br>
- Description: {{ gallery.description }} <br>
- <div>
-  <img class="img-responsive" src="{{ gallery.pictures[0]?.imageUrl }}">
- </div>
+    <h3>Name: <strong><a [routerLink]="['/gallery', gallery.id]" >{{ gallery.name }}</a></strong></h3><br>
+    Description: {{ gallery.description }} <br>
+    <div>
+        <img class="img-responsive" src="{{ gallery.pictures[0]?.imageUrl }}">
+    </div>
 </li>
