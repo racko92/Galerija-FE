@@ -1,5 +1,16 @@
-<!-- <ul class="list-group">
-  <p>{{ gallery.name }}</p>
-  <p>{{ gallery.description }}</p>{{ gallery.desription }} <br>
-  <img src="{{gallery.imageUrl}}">
-</ul> -->
+<h1>Galleries</h1>
+
+<ul>
+    <li class="align-middle">
+    <h3>Name: <strong>{{ gallery.name }}</strong></h3><br>
+    Description: {{ gallery.description }} <br>
+    <div class="align-middle" *ngFor="let picture of gallery.pictures">
+        <img class="img-responsive" src="{{ picture.imageUrl }}" width="30%" height="30%" style="float:left; margin:5px;">
+    </div>
+    <br>
+    </li>  
+</ul>
+
+<ul class="align-middle" *ngFor="let comment of gallery.comments" style="clear:both">
+        <li><strong>{{ gallery.user.firstName }}</strong> says: {{ comment.body }}</li>
+    </ul>

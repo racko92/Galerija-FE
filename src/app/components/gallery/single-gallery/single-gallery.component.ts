@@ -9,32 +9,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SingleGalleryComponent implements OnInit {
 
-  private gallery: Gallery;
+  public gallery: Gallery;
   
   constructor(
     public galleryService: GalleryService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+  ) { 
+    
+  }
 
   ngOnInit() {
-    let id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.galleryService.getGalleryById(id).subscribe(
-      data => {
-        this.gallery = data;
-      }
-    );
+    this.route.params.subscribe(() => {
+      let id = parseInt(this.route.snapshot.paramMap.get('id'));
+      this.galleryService.getGalleryById(id).subscribe((gallery: Gallery) => {
+        this.gallery = gallery;
+        console.log(this.gallery);
+      })
+    });
   }
 
 }
-
-
-
-
-
-
-// this.route.params.subscribe(() => {
-//   let id = parseInt(this.route.snapshot.paramMap.get('id'));
-//   this.galleryService.getGalleryById(id).subscribe((data: {gallery: Gallery}) => {
-//     this.gallery = data.gallery;
-//   })
-// }); 

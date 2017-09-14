@@ -1,4 +1,4 @@
-export class Image{
+export class Picture{
     constructor(
         id?: number,
         imageUrl?: string,

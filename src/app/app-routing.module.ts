@@ -40,12 +40,12 @@ const appRoutes: Routes = [
       {
         path: 'my-galleries',
         component: MyGalleriesComponent,
-        canActivate: [ AuthGuard]
+        canActivate: [ AuthGuard ]
       },
       {
         path: 'create',
         component: CreateGalleryComponent,
-        canActivate: [ AuthGuard]
+        canActivate: [ AuthGuard ]
       }
 ];
 
