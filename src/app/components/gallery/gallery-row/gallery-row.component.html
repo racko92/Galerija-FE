@@ -1,7 +1,13 @@
 <li class="align-middle">
     <h3>Name: <strong><a [routerLink]="['/gallery', gallery.id]" >{{ gallery.name }}</a></strong></h3><br>
-    Description: {{ gallery.description }} <br>
-    <div>
-        <img class="img-responsive" src="{{ gallery.pictures[0]?.imageUrl }}">
+    <div class="align-middle">
+        <img class="img-responsive" src="{{ gallery.pictures[0].imageUrl }}">
     </div>
+    <p>Created by: 
+        <a [routerLink]="['/my-galleries', gallery.user_id]" > <!-- gallery.user treba biti async -->
+            <i>
+                {{ gallery.user?.firstName }}
+            </i>
+        </a>
+    </p>
 </li>

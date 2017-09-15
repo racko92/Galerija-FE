@@ -36,4 +36,17 @@ export class UserService {
       }
     });
   }
+
+  public getUserById(id: number){
+    return new Observable((o: Observer<any>) => {
+      this.http.get('http://localhost:8000/api/my-galleries/' + id, {
+        headers: this.auth.getRequestHeader()
+      })
+      .subscribe((user: any[]) => {
+        o.next(user);
+        return o.complete;
+      })
+    })
+  }
+
 }

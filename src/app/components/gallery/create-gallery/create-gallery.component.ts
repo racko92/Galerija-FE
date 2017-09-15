@@ -21,19 +21,19 @@ export class CreateGalleryComponent{
 
   private newGalery: Gallery  = new Gallery();
 
-  private galeryUrl: string[] = [""];
+  private galleryUrl: string[] = [""];
 
   trackByIndex(index: number, obj:any):any {
-  return index;
+    return index;
   }
 
   addInput(){
-  this.galeryUrl.push('');
+  this.galleryUrl.push('');
   this.number ++;
   }
 
   removeInput(){
-  this.galeryUrl.pop();
+  this.galleryUrl.pop();
   this.number --;
   }
 

@@ -13,6 +13,7 @@ export class AuthService {
     private router: Router
   ) {
     let token = window.localStorage.getItem('token');
+    let user = {};
     this.isAuthenticated = !! token;
   }
 
@@ -21,9 +22,11 @@ export class AuthService {
       this.http.post('http://localhost:8000/api/login', {
         email,
         password
-      }).subscribe((data: {token: string}) => {
+      }).subscribe((data: {token: string, user: any}) => {
         window.localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
         let token = window.localStorage.getItem('token');
+        
         this.isAuthenticated = true;
         o.next(data.token);
         return o.complete;
@@ -42,5 +45,9 @@ export class AuthService {
   getRequestHeader(){
     let token = window.localStorage.getItem('token');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`)
+  }
+
+  public getUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }

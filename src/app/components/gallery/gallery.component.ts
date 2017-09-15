@@ -38,7 +38,18 @@ export class GalleryComponent implements OnInit{
       (err: HttpErrorResponse) => {
         alert(`Backend Error with code ${err.status} and status ${err.error}`);
       }
-    )
+    )  
+   }
+   search(term){
+    this.galleryService.searchByTerm(term).subscribe(
+       (data => {
+        this.galleries = data;
+        
+       }),
+       (err: HttpErrorResponse) => {
+         alert(`Backend Error with code ${err.status} and status ${err.error}`);
+       }
+     )
    }
 
 }

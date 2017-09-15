@@ -4,6 +4,7 @@ import { Observable, Observer } from 'rxjs';
 import { Gallery } from './../models/gallery.model';
 import { AuthService } from './auth.service';
 import { Picture } from './../models/pictures.model';
+import { User } from './../models/user.model';
 
 @Injectable()
 export class GalleryService {
@@ -30,7 +31,7 @@ export class GalleryService {
         this.paginateLast = galleries.last_page;
         this.currentPage = galleries.current_page;
         this.galleries = galleries.data.map((gallery) => {
-          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures);
+          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures, gallery.user, gallery.user_id);
         });
         o.next(this.galleries);
         return o.complete();
@@ -61,7 +62,7 @@ export class GalleryService {
         this.paginateLast = galleries.last_page;
         this.currentPage = galleries.current_page;
         this.galleries = galleries.data.map((gallery) => {
-          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures);
+          return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures, gallery.user, gallery.user_id);
         });
         o.next(this.galleries);
         return o.complete();
@@ -74,5 +75,20 @@ export class GalleryService {
       return true;
     }
     return false;
+  }
+
+  searchByTerm(term){
+    return new Observable((o: Observer<any>) => {
+      this.http.get('http://localhost:8000/api/search/' + term, {
+        headers: this.auth.getRequestHeader()
+      })
+        .subscribe((galleries: any) => {
+          this.galleries = galleries.data.map((gallery) => {
+            return new Gallery(gallery.id, gallery.name, gallery.description, gallery.pictures, gallery.user, gallery.user_id);
+          });
+          o.next(this.galleries);
+          return o.complete();
+        });
+    })
   }
 }

@@ -1,26 +1,34 @@
 <h3>Add new gallery</h3>
 
-<form class="galleryForm" (ngSubmit)="addGallery(newGalery)">
+<form #galleryForm="ngForm" class="galleryForm" (ngSubmit)="addGallery(newGallery)">
   <div class="form-group">
     <label>Title</label>
-    <input  [(ngModel)]="newGalery.title" name='title'  type="text" class="form-control" >
+    <input #title="ngModel"  [(ngModel)]="newGallery.title" name="title"  type="text" class="form-control" required minlength="2" >
   </div>
+
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+        <div *ngIf="title.errors.required">
+          Title is required.
+        </div>
+        <div *ngIf="title.errors.minlength">
+          Title must be at least 3 characters long.
+        </div>
+        <div *ngIf="title.errors.maxlength">
+          Title can't be more than 255 characters long.
+        </div>
+      </div>
   
   <div class="form-group">
     <label>Content</label>
-    <input  [(ngModel)]="newGalery.content" name='title'  type="text" class="form-control" >
+    <input  [(ngModel)]="newGallery.content" name='content'  type="text" class="form-control" >
   </div>
-
-  <div class="form-group">
+  
+  <div class="form-group" *ngFor="let item of galleryUrl; let index = index; trackBy:trackByIndex;">
     <label>Url</label>
-    <div *ngFor="let item of galeryUrl; let index = index; trackBy:trackByIndex;">
-      <input  [(ngModel)]="galeryUrl[index]" name='galery{{index}}' placeholder="item" type="text" class="form-control" >
-    </div>
-    <button *ngIf="number <= 10" type="button" (click)="addInput()" class="btn btn-primary">add</button>
-    <button *ngIf="number > 1" type="button" (click)="removeInput()" class="btn btn-danger">remove</button>
+    <input #url="ngModel"  [(ngModel)]="galleryUrl[index]" name='gallery{{index}}' placeholder="item" type="text" class="form-control" required >
   </div>
 
-  <div class="form-group">
-    <button  type="submit" class="btn btn-primary">submit</button>
-  </div>
+  <button  type="submit" class="btn btn-primary">submit</button>
+  <button *ngIf="number <= 10" type="button" (click)="addItem()" class="btn btn-primary">add</button>
+  <button *ngIf="number > 1" type="button" (click)="removeItem()" class="btn btn-danger">remove</button>
 </form>

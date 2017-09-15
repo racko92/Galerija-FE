@@ -1,4 +1,14 @@
 <h1>Galleries</h1>
+<div class="align-middle">
+    <form #form="ngForm" (ngSubmit)="search(term)" class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+            <input [(ngModel)]="term" required name="term" type="text" class="form-control" placeholder="Search for galleries...">
+            <span class="input-group-btn">
+            <button [disabled]="form.invalid" class="btn btn-primary" type="submit">Search</button>
+            </span>
+        </div>
+    </form>
+</div>
 
 <ul *ngFor="let gallery of galleries" [galleryRow]="gallery">
 

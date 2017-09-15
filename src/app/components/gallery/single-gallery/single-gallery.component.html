@@ -11,6 +11,6 @@
     </li>  
 </ul>
 
-<ul class="align-middle" *ngFor="let comment of gallery.comments" style="clear:both">
-        <li><strong>{{ gallery.user.firstName }}</strong> says: {{ comment.body }}</li>
+<ul class="align-middle" *ngFor="let comment of gallery?.comments" style="clear:both">
+        <li><strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> says: {{ comment.body }}</li>
     </ul>

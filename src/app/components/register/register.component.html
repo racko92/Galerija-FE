@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input  #lastName="ngModel" type="text" name="lastName" minlength="2" [(ngModel)]="newUser.lastName" class="form-control">
+        <input  #lastName="ngModel" type="text" name="lastName" minlength="2" [(ngModel)]="newUser.lastName" class="form-control" required>
     
         
         <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
@@ -36,7 +36,7 @@
 
     <div class="form-group">
         <label for="email">Email</label>
-        <input #email="ngModel" [(ngModel)]="newUser.email" type="email" name="email" class="form-control">
+        <input #email="ngModel" [(ngModel)]="newUser.email" type="email" name="email" class="form-control" required>
 
         <div *ngIf="email.invalid && (email.dirty || email.touched)"
         class="alert alert-danger">

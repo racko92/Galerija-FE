@@ -27,7 +27,7 @@ import { MyGalleriesComponent } from './components/gallery/my-galleries/my-galle
     GalleryRowComponent,
     SingleGalleryComponent,
     CreateGalleryComponent,
-    MyGalleriesComponent
+    MyGalleriesComponent,
   ],
   imports: [
     BrowserModule,
