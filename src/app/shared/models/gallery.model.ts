@@ -6,5 +6,6 @@ export class Gallery {
         public pictures?: string[],
         public user?: any[],
         public user_id?: number,
+        public comments?: any[]
     ){}
 }

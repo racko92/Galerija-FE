@@ -13,6 +13,7 @@ export class AuthService {
     private router: Router
   ) {
     let token = window.localStorage.getItem('token');
+    
     let user = {};
     this.isAuthenticated = !! token;
   }

@@ -1,16 +1,26 @@
 <h1>Galleries</h1>
+<div class="align-middle">
+    <ul>
+        <li class="align-middle">
+        <h3>Name: <strong>{{ gallery?.name }}</strong></h3><br>
+        Description: {{ gallery?.description }} <br>
+        <div class="align-middle" *ngFor="let picture of gallery?.pictures">
+            <img class="img-responsive" src="{{ picture.imageUrl }}" width="30%" height="30%" style="float:left; margin:5px;">
+        </div>
+        <br>
+        </li>  
+    </ul>
 
-<ul>
-    <li class="align-middle">
-    <h3>Name: <strong>{{ gallery.name }}</strong></h3><br>
-    Description: {{ gallery.description }} <br>
-    <div class="align-middle" *ngFor="let picture of gallery.pictures">
-        <img class="img-responsive" src="{{ picture.imageUrl }}" width="30%" height="30%" style="float:left; margin:5px;">
-    </div>
-    <br>
-    </li>  
-</ul>
-
-<ul class="align-middle" *ngFor="let comment of gallery?.comments" style="clear:both">
+    <ul class="align-middle" *ngFor="let comment of gallery?.comments" style="clear:both">
         <li><strong>{{ comment.user.firstName }} {{ comment.user.lastName }}</strong> says: {{ comment.body }}</li>
     </ul>
+</div>
+
+
+<form #commentForm="ngForm" (ngSubmit)="postComment(comment); commentForm.reset()">
+    <div class="form-group">
+        <label>Make a comment: </label>
+        <input #comment="ngModel" type="text" name="comment" minlength="2" [(ngModel)]="comment.body" class="form-control" required>
+    </div>
+    <button>Comment</button>
+</form>
