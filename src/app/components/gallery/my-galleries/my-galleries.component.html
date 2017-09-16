@@ -3,10 +3,9 @@
 <h3>User: <i> {{ user?.firstName }} {{ user?.lastName}} </i></h3>
 <div class="allign-middle">
     <ul *ngFor="let gallery of user?.galleries">
-
-
         <li class="align-middle">
             <h3 style="clear:both; margin-top:10px">Name: <strong>{{ gallery.name }}</strong></h3><br>
+            <button class="btn btn-primary" [disabled]="!deleteValidation()" (click)="deleteGallery(gallery)">Delete Gallery</button><br>            
             Description: {{ gallery.description }} <br>
             <div class="align-middle" *ngFor="let picture of gallery.pictures">
                 <img class="img-responsive" src="{{ picture.imageUrl }}" width="30%" height="30%" style="float:left; margin:5px;">

@@ -5,6 +5,7 @@ import { Gallery } from './../models/gallery.model';
 import { AuthService } from './auth.service';
 import { Picture } from './../models/pictures.model';
 import { User } from './../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GalleryService {
@@ -18,7 +19,8 @@ export class GalleryService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   public getGalleries()
@@ -106,11 +108,27 @@ export class GalleryService {
         let g = new Gallery(gallery);
         o.next(g);
         this.galleries.push(g);
+        this.router.navigateByUrl('my-galleries/' + this.auth.getUser().id);        
         return o.complete();
       }), () => {
         console.log('Error');
       }
     })
+  }
+
+  deleteGallery(gallery: Gallery){
+    return new Observable((o: Observer<any>) => {
+      this.http.delete('http://localhost:8000/api/galleries/' + gallery.id, {
+        headers: this.auth.getRequestHeader()
+      })
+      .subscribe(() => {
+        let index = this.galleries.indexOf(gallery);
+        this.galleries.splice(index, 1);
+
+        o.next(index);
+        return o.complete;
+      });
+    });
   }
 
 }

@@ -45,7 +45,6 @@ export class CreateGalleryComponent{
     
     this.galleryService.storeGallery(newGallery).subscribe((gallery) => {
       this.galleryService.galleries.push(gallery);
-      this.router.navigateByUrl('my-galleries/' + this.authService.getUser().id);
     })
   }
   

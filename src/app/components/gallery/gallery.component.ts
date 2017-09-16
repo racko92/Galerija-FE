@@ -2,6 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { GalleryService } from './../../shared/services/gallery.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Gallery } from './../../shared/models/gallery.model';
+import { AuthService } from './../../shared/services/auth.service';
 
 @Component({
   selector: 'app-gallery',
@@ -11,9 +12,13 @@ export class GalleryComponent implements OnInit{
 
   private galleries: Gallery[];
   private galleryService: GalleryService;
-  
+  public loggedUserId;
 
-  constructor(private injector: Injector) {
+  constructor(
+    private injector: Injector,
+    public authService: AuthService
+  ) {
+    this.loggedUserId = this.authService.getUser().id;
    }
 
    ngOnInit(){

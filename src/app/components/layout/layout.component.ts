@@ -10,8 +10,6 @@ export class LayoutComponent {
   private userId: number;
 
   constructor(private auth: AuthService) {
-    this.userId = this.auth.getUser().id;
-    console.log(this.userId);
    }
 
 }

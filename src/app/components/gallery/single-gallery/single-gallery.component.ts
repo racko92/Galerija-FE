@@ -31,8 +31,6 @@ export class SingleGalleryComponent implements OnInit {
         this.gallery = gallery;
       });
     });
-
-    console.log(this.authService.getUser().id);
   }
 
 

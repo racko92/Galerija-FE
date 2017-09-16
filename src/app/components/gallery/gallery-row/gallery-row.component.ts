@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
 import { Gallery } from './../../../shared/models/gallery.model';
+import { AuthService } from './../../../shared/services/auth.service';
 
 @Component({
   selector: '[galleryRow]',
@@ -11,7 +12,9 @@ export class GalleryRowComponent {
   set galleryRow(gallery: Gallery){
     this.gallery = gallery;
   }
-  constructor() {
+  constructor(
+    public authService: AuthService
+  ) {
    }
 
   private gallery: Gallery;
