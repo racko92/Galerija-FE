@@ -37,7 +37,7 @@ const appRoutes: Routes = [
         canActivate: [ GuestGuard ],
       },
       {
-        path: 'my-galleries/:id',
+        path: 'my-galleries',
         component: MyGalleriesComponent,
         canActivate: [ AuthGuard ]
       },

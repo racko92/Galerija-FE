@@ -2,33 +2,61 @@
 
 <form #galleryForm="ngForm" class="galleryForm" (ngSubmit)="addGallery(newGallery)">
   <div class="form-group">
-    <label>Title</label>
-    <input #title="ngModel"  [(ngModel)]="newGallery.title" name="title"  type="text" class="form-control" required minlength="2" >
-  </div>
-
-      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
-        <div *ngIf="title.errors.required">
-          Title is required.
+    <label for="name">Gallery Name</label>
+    <input #name="ngModel"  [(ngModel)]="newGallery.name" name="name"  type="text" class="form-control" required minlength="3" maxlength="255">
+  
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+            Gallery Name is required.
         </div>
-        <div *ngIf="title.errors.minlength">
-          Title must be at least 3 characters long.
+        <div *ngIf="name.errors.minlength">
+            Gallery Name must be at least 3 characters long.
         </div>
-        <div *ngIf="title.errors.maxlength">
-          Title can't be more than 255 characters long.
+        <div *ngIf="name.errors.maxlength">
+            Gallery Name can't be more than 255 characters long.
         </div>
       </div>
-  
+    </div>
   <div class="form-group">
-    <label>Content</label>
-    <input  [(ngModel)]="newGallery.content" name='content'  type="text" class="form-control" >
-  </div>
-  
-  <div class="form-group" *ngFor="let item of galleryUrl; let index = index; trackBy:trackByIndex;">
-    <label>Url</label>
-    <input #url="ngModel"  [(ngModel)]="galleryUrl[index]" name='gallery{{index}}' placeholder="item" type="text" class="form-control" required >
+    <label>Description</label>
+    <textarea #description="ngModel" [(ngModel)]="newGallery.description" name='description'  type="text" class="form-control" required minlength="20" maxlength="255">
+    </textarea>
+
+  <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+      <div *ngIf="description.errors.required">
+          Description is required.
+      </div>
+      <div *ngIf="description.errors.minlength">
+          Description must be at least 20 characters long.
+      </div>
+      <div *ngIf="description.errors.maxlength">
+          Description can't be more than 255 characters long.
+      </div>
+    </div>
+  </div>  
+
+  <label>Url</label>
+  <div class="form-group">
+    <div class="form-item" *ngFor="let item of images; let index = index; trackBy:trackByIndex;">
+      <input #url="ngModel" [(ngModel)]="images[index]" name='images{{ index }}' placeholder="Link #{{index + 1}}" type="url" class="form-control" required url>
+
+        <div *ngIf="url.invalid && (url.dirty || url.touched)" class="alert alert-danger">
+          <div *ngIf="url.errors.url">
+              URL #{{index + 1}} is wrong type.
+          </div>
+          <div *ngIf="url.errors.required">
+              URL is required.
+          </div>
+        </div>
+    </div>
+    <button [disabled]="!(number <= 9)" type="button" (click)="addInput()" class="btn btn-primary">Add Picture Field</button>
+    <button *ngIf="number > 1" type="button" (click)="removeInput()" class="btn btn-danger">Remove Picture Field</button>
   </div>
 
-  <button  type="submit" class="btn btn-primary">submit</button>
-  <button *ngIf="number <= 10" type="button" (click)="addItem()" class="btn btn-primary">add</button>
-  <button *ngIf="number > 1" type="button" (click)="removeItem()" class="btn btn-danger">remove</button>
+
+  
+
+
+  <button [disabled]="!galleryForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+
 </form>

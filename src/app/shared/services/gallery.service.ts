@@ -9,8 +9,8 @@ import { User } from './../models/user.model';
 @Injectable()
 export class GalleryService {
 
-  private galleries: Gallery[] = [];
-  private gallery: Gallery;
+  public galleries: Gallery[] = [];
+  public gallery: Gallery;
   public currentPage: number;
   public paginate: number = 1;
   public paginateLast: number;
@@ -91,4 +91,26 @@ export class GalleryService {
         });
     })
   }
+
+  storeGallery(gallery: Gallery){
+    return new Observable((o: Observer<any>) => {
+      this.http.post('http://localhost:8000/api/create', {
+        name: gallery.name,
+        description: gallery.description,
+        user_id: gallery.user_id,
+        pictures: gallery.pictures
+      },{
+        headers: this.auth.getRequestHeader()
+      })
+      .subscribe((gallery: any) => {
+        let g = new Gallery(gallery);
+        o.next(g);
+        this.galleries.push(g);
+        return o.complete();
+      }), () => {
+        console.log('Error');
+      }
+    })
+  }
+
 }

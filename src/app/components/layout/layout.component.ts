@@ -7,8 +7,11 @@ import { AuthService } from './../../shared/services/auth.service';
 })
 export class LayoutComponent {
 
-  constructor(private auth: AuthService) { }
+  private userId: number;
 
-  
+  constructor(private auth: AuthService) {
+    this.userId = this.auth.getUser().id;
+    console.log(this.userId);
+   }
 
 }

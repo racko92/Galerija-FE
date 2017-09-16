@@ -4,7 +4,7 @@
         <img class="img-responsive" src="{{ gallery.pictures[0].imageUrl }}">
     </div>
     <p>Created by: 
-        <a [routerLink]="['/my-galleries', gallery.user_id]" > <!-- gallery.user treba biti async -->
+        <a [routerLink]="['/my-galleries', gallery.user_id]" >
             <i>
                 {{ gallery.user?.firstName }}
             </i>
